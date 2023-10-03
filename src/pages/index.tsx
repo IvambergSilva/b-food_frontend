@@ -4,7 +4,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import Head from "next/head";
 import React, { FormEvent, useContext, useState } from "react";
 import Styles from '../styles/index.module.scss'
-import { Base, Color } from "@/styles/variables";
+import { Base } from "@/styles/variables";
 
 export default function Home() {
     const [newUser, setNewUser] = useState(false)
@@ -28,16 +28,20 @@ export default function Home() {
     }
 
     return (
-        <>
+        <div
+            className={Styles.homeContainer}
+            style={{ backgroundColor: Base.gray_600 }}
+        >
             <Head>
                 <title>B-Food - Faça o seu login</title>
             </Head>
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleLogin} className={Styles.formLogin}>
                 {newUser &&
                     <Input
                         placeholder="Digite o nome da sua empresa"
                         type="text"
+                        value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
                 }
@@ -87,6 +91,6 @@ export default function Home() {
                     </section>
                 }
             </form>
-        </>
+        </div>
     )
 }

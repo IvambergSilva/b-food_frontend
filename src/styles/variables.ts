@@ -2,7 +2,6 @@ export const Highlight = {
     purple_light: '#A881E6',
     purple: '#7450AC',
 }
-export const Color: string = '#FBF9FE' 
 export const Base = {
     gray_100: '#FBF9FE',
     gray_200: '#AFABB6',

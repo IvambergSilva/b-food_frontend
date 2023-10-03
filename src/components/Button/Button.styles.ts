@@ -26,4 +26,9 @@ export const ButtonContainer = styled.button`
         return props.disabled ? IconSpin : ''
     }} 1s infinite;
     }
+
+    &:active {
+        position: relative;
+        top: 1px;
+    }
 `
