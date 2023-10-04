@@ -5,6 +5,7 @@ import Head from "next/head";
 import React, { FormEvent, useContext, useState } from "react";
 import Styles from '../styles/index.module.scss'
 import { Base } from "@/styles/variables";
+import { toast } from "react-toastify";
 
 export default function Home() {
     const [newUser, setNewUser] = useState(false)
@@ -15,9 +16,66 @@ export default function Home() {
     const [password, setPassword] = useState('')
 
     const { signIn } = useContext(AuthContext)
+    const { signUp } = useContext(AuthContext)
 
     async function handleLogin(event: FormEvent) {
         event.preventDefault()
+
+        if (email === '' || password === '') {
+            toast.error('Preencha todos os campos', {
+                style: {
+                    fontSize: '1.5rem'
+                }
+            })
+
+            setEmail('')
+            setPassword('')
+            return;
+        }
+
+        newUser ? handleSignUp() : handleSigIn()
+    }
+
+    async function handleSignUp() {
+        if (name === '') {
+            toast.error('Preencha todos os campos', {
+                style: {
+                    fontSize: '1.5rem'
+                }
+            })
+
+            setName('')
+            return;
+        }
+
+        setLoading(true)
+
+        let userInfo = {
+            name: name,
+            email: email,
+            password: password
+        }
+
+        const feeback = await signUp(userInfo)
+
+        if (!feeback) {
+            setNewUser(false)
+            setName('')
+            setEmail('')
+            setPassword('')
+        }
+
+        toast.success('Login efetuado com sucesso', {
+            style: {
+                fontSize: '1.5rem'
+            }
+        })
+
+        setLoading(false)
+    }
+
+    async function handleSigIn() {
+        setLoading(true)
 
         let userInfo = {
             email: email,
@@ -25,12 +83,20 @@ export default function Home() {
         }
 
         await signIn(userInfo)
+
+        toast.success('Conta cadastrada com sucesso', {
+            style: {
+                fontSize: '1.5rem'
+            }
+        })
+
+        setLoading(false)
     }
 
     return (
         <div
             className={Styles.homeContainer}
-            style={{ backgroundColor: Base.gray_600 }}
+            style={{ backgroundColor: Base.gray_500 }}
         >
             <Head>
                 <title>B-Food - Faça o seu login</title>
@@ -65,13 +131,12 @@ export default function Home() {
                         <Button
                             type="submit"
                             name="Cadastrar"
-                            loading={false}
+                            loading={loading}
                         />
 
                         <Button
                             type="button"
                             name="Já possuo uma conta"
-                            loading={false}
                             onClick={() => setNewUser(false)}
                         />
                     </section>
@@ -79,13 +144,12 @@ export default function Home() {
                         <Button
                             type="submit"
                             name="Acessar"
-                            loading={false}
+                            loading={loading}
                         />
 
                         <Button
                             type="button"
                             name="Criar uma nova conta"
-                            loading={false}
                             onClick={() => setNewUser(true)}
                         />
                     </section>

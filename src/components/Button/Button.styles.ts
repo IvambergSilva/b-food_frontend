@@ -1,3 +1,4 @@
+import { Base, Palette } from '@/styles/variables'
 import { keyframes, styled } from 'styled-components'
 
 const IconSpin = keyframes`
@@ -14,6 +15,10 @@ export const ButtonContainer = styled.button`
     border-radius: 0.5rem;
     border: none;
     padding: 0.8rem;
+    background: ${(props) => {
+        return props.type === 'submit' ? Palette.success : Palette.sereneIndigo
+    }};
+    color: ${Base.gray_400};
 
     p {
         display: flex;
@@ -30,5 +35,9 @@ export const ButtonContainer = styled.button`
     &:active {
         position: relative;
         top: 1px;
+    }
+
+    &:hover {
+        filter: brightness(1.2);
     }
 `

@@ -7,7 +7,7 @@ export const InputContainer = styled.input`
     border: 1px solid ${Base.gray_300};
     outline: none;
     text-align: center;
-    background: ${Base.gray_500};
+    background: ${Base.gray_400};
     height: 3.2rem;
     color: ${Base.gray_200};
 
@@ -16,7 +16,7 @@ export const InputContainer = styled.input`
     }
 
     &:focus {
-        border: 1px solid ${Highlight.purple_light};
+        border: 1px solid ${Highlight.purple};
     }
 `
 export const TextAreaContainer = styled.textarea`

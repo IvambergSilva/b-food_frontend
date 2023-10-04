@@ -1,18 +1,20 @@
 export const Highlight = {
-    purple_light: '#A881E6',
-    purple: '#7450AC',
+    purple: '#A881E6',
 }
 export const Base = {
     gray_100: '#FBF9FE',
     gray_200: '#AFABB6',
     gray_300: '#444444',
-    gray_400: '#29292d',
-    gray_500: '#17171A',
-    gray_600: '#0C0C0D',
+    gray_400: '#17171A',
+    gray_500: '#0C0C0D',
 }
 
-export const Feedback = {
-    success: '#24AF53',
+export const Palette = {
+    success: '#3ECC29',
+    lightMustard: '#EBC569',
+    rustyRed: '#CC3B15',
+    brightOrange: '#FF7800',
+    sereneIndigo: '#629BF6'
 }
 
 function createTextStyle(size: string, lineHeight: string, weight: string) {
