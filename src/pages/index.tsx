@@ -4,10 +4,18 @@ import { AuthContext } from "@/contexts/AuthContext";
 import Head from "next/head";
 import React, { FormEvent, useContext, useState } from "react";
 import Styles from '../styles/index.module.scss'
-import { Base } from "@/styles/variables";
+import { DarkMode, LightMode } from "@/styles/variables";
 import { toast } from "react-toastify";
+import ImageDark from '../assets/images/logo-dark.png'
+import ImageLight from '../assets/images/logo-light.png'
+import Switch from "@/components/Switch/Switch";
 
-export default function Home() {
+interface IHomeProps {
+    toggleTheme(): void;
+    themeTitle: string
+}
+
+export default function Home({ toggleTheme, themeTitle }: IHomeProps) {
     const [newUser, setNewUser] = useState(false)
     const [loading, setLoading] = useState(false)
 
@@ -96,11 +104,25 @@ export default function Home() {
     return (
         <div
             className={Styles.homeContainer}
-            style={{ backgroundColor: Base.gray_500 }}
+            style={{
+                backgroundColor: `${themeTitle === 'dark'
+                    ? DarkMode.colors.base.gray_500
+                    : LightMode.colors.base.gray_500}`
+            }}
         >
             <Head>
                 <title>B-Food - Faça o seu login</title>
             </Head>
+
+            <Switch
+                onClickToggle={toggleTheme}
+            />
+
+            <img src={
+                themeTitle === 'dark'
+                    ? ImageDark.src
+                    : ImageLight.src
+            } alt="Logo da aplicação" />
 
             <form onSubmit={handleLogin} className={Styles.formLogin}>
                 {newUser &&

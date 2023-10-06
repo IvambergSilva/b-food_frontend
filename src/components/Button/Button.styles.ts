@@ -1,4 +1,4 @@
-import { Base, Palette } from '@/styles/variables'
+import { DarkMode } from '@/styles/variables'
 import { keyframes, styled } from 'styled-components'
 
 const IconSpin = keyframes`
@@ -16,9 +16,9 @@ export const ButtonContainer = styled.button`
     border: none;
     padding: 0.8rem;
     background: ${(props) => {
-        return props.type === 'submit' ? Palette.success : Palette.sereneIndigo
+        return props.type === 'submit' ? DarkMode.colors.pallete.success : DarkMode.colors.pallete.sereneIndigo
     }};
-    color: ${Base.gray_400};
+    color: ${DarkMode.colors.base.gray_400};
 
     p {
         display: flex;
