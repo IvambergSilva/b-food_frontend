@@ -16,7 +16,7 @@ export const ButtonContainer = styled.button`
     border: none;
     padding: 0.8rem;
     background: ${(props) => {
-        return props.type === 'submit' ? DarkMode.colors.pallete.success : DarkMode.colors.pallete.sereneIndigo
+        return props.type === 'submit' ? DarkMode.colors.pallete.success : DarkMode.colors.highlight.sereneIndigo
     }};
     color: ${DarkMode.colors.base.gray_400};
 
@@ -38,6 +38,6 @@ export const ButtonContainer = styled.button`
     }
 
     &:hover {
-        filter: brightness(1.2);
+        filter: brightness(1.1);
     }
 `

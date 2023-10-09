@@ -17,6 +17,5 @@ export default function Button({ name, loading, ...rest }: IButtonProps) {
                 {loading ? (<Loader2 />) : (<>{name}</>)}
             </p>
         </ButtonContainer>
-
     )
 }

@@ -10,15 +10,14 @@ export const DarkMode = {
         },
 
         highlight: {
-            purple: '#A881E6',
+            sereneIndigo: '#629BF6'
         },
 
         pallete: {
             success: '#3ECC29',
             lightMustard: '#EBC569',
             rustyRed: '#CC3B15',
-            brightOrange: '#FF7800',
-            sereneIndigo: '#629BF6'
+            brightOrange: '#FF7800'
         }
     }
 }
@@ -30,12 +29,12 @@ export const LightMode = {
             gray_100: '#0C0C0D',
             gray_200: '#17171A',
             gray_300: '#444444',
-            gray_400: '#AFABB6',
+            gray_400: '#F0F0F0',
             gray_500: '#FBF9FE'
         },
 
         highlight: {
-            purple: '#7A41A6',
+            sereneIndigo: '#90CAF9',
         },
 
         pallete: {
@@ -43,7 +42,6 @@ export const LightMode = {
             lightMustard: '#FFD966',
             rustyRed: '#FF5733',
             brightOrange: '#FFA726',
-            sereneIndigo: '#90CAF9',
         }
     }
 }

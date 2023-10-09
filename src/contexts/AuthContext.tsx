@@ -1,13 +1,13 @@
 import { api } from "@/services/apiClient";
 import Router from "next/router";
-import { destroyCookie, setCookie } from "nookies";
-import { createContext, ReactNode, useState } from "react";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 interface AuthContextData {
     user: IUserProps;
     isAuthenticated: boolean;
-    signIn: (credentials: ISignInProps) => Promise<void>;
+    signIn: (credentials: ISignInProps) => Promise<boolean>;
     signUp: (credentials: ISignUpProps) => Promise<boolean>;
     signOut: () => void;
 }
@@ -37,8 +37,21 @@ export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: IAuthProviderProps) {
     const [user, setUser] = useState<IUserProps>()
-
     const isAuthenticated = !!user
+
+    useEffect(() => {
+        const { '@bfood.token': token } = parseCookies();
+
+        if (token) {
+            api.get('/me').then((response) => {
+                const { id, name, email } = response.data
+                setUser({id, name, email})
+            }).catch(() => {
+                signOut()
+            })
+        }
+
+    }, [])
 
     async function signIn({ email, password }: ISignInProps) {
         try {
@@ -58,6 +71,8 @@ export function AuthProvider({ children }: IAuthProviderProps) {
             api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
             Router.push('/dashboard');
+
+            return true
         } catch (error) {
             toast.error('Error ao acessar. Observe o console.', {
                 style: {
@@ -65,6 +80,8 @@ export function AuthProvider({ children }: IAuthProviderProps) {
                 }
             })
             console.log('Error: ', error);
+
+            return false
         }
     }
 

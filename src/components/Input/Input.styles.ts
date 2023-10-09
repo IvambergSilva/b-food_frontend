@@ -15,7 +15,7 @@ export const InputContainer = styled.input`
     }
 
     &:focus {
-        border: 1px solid ${(props) => props.theme.colors.highlight.purple};
+        border: 1px solid ${(props) => props.theme.colors.highlight.sereneIndigo};
     }
 `
 export const TextAreaContainer = styled.textarea`

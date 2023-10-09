@@ -37,7 +37,7 @@ export const SwitchContainer = styled.button`
     span {
         background: ${props => props.theme.title === 'light'
         ? DarkMode.colors.pallete.lightMustard
-        : DarkMode.colors.pallete.sereneIndigo
+        : DarkMode.colors.highlight.sereneIndigo
     };
     color: ${(props) => props.theme.colors.base.gray_100};
 
