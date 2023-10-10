@@ -1,0 +1,30 @@
+.categoryContainer {
+    height: 100vh;
+    .categoryMain {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.5px;
+
+        h1 {
+            font-size: 2rem;
+            margin: 3rem 0 0.5rem;
+        }
+
+        .formCategory {
+            max-width: 45rem;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-self: center;
+            margin: auto;
+        }
+    }
+
+    @media screen and (max-width: 520px) {
+        .formCategory {
+            width: 90%
+        }
+    }
+
+}

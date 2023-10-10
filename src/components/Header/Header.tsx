@@ -33,8 +33,9 @@ export default function Header({ toggleTheme, themeTitle }) {
 
             <nav>
                 <Link href={'/category'}>
-                    <span>Categorias</span>
+                    <span>Nova categoria</span>
                 </Link>
+
                 <Link href={'/product'}>
                     <span>Cardapio</span>
                 </Link>

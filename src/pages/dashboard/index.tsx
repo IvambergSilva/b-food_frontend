@@ -1,6 +1,7 @@
 import Header from "@/components/Header/Header"
 import canSSRAuth from "@/utils/canSSRAuth"
 import Head from "next/head"
+import Category from "../category";
 
 interface IHomeProps {
     toggleTheme(): void;
