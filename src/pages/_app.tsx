@@ -18,7 +18,9 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <ThemeProvider theme={theme}>
             <AuthProvider>
-                <ToastContainer autoClose={2500} />
+                <ToastContainer
+                    autoClose={2500}
+                    style={{ fontSize: '1.5rem' }} />
                 <GlobalStyle />
                 <Component
                     toggleTheme={toggleTheme}

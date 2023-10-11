@@ -8,13 +8,10 @@ import Title from "@/components/Title/Title";
 import { FormEvent, useState } from "react"
 import setupApiClient from "@/services/api";
 import { toast } from "react-toastify";
+import canSSRAuth from "@/utils/canSSRAuth";
+import { IToggleProps } from "@/contexts/authContext";
 
-interface IHomeProps {
-    toggleTheme(): void;
-    themeTitle: string
-}
-
-export default function Category({ toggleTheme, themeTitle }: IHomeProps) {
+export default function Category({ toggleTheme, themeTitle }: IToggleProps) {
 
     const [name, setName] = useState('')
 
@@ -22,11 +19,7 @@ export default function Category({ toggleTheme, themeTitle }: IHomeProps) {
         event.preventDefault()
 
         if (name === '') {
-            toast.error('Digite uma categoria', {
-                style: {
-                    fontSize: '1.5rem'
-                }
-            })
+            toast.error('Digite uma categoria')
         }
 
         const apiClient = setupApiClient();
@@ -34,11 +27,7 @@ export default function Category({ toggleTheme, themeTitle }: IHomeProps) {
             name: name
         });
 
-        toast.success('Categoria cadastrada com sucesso', {
-            style: {
-                fontSize: '1.5rem'
-            }
-        })
+        toast.success('Categoria cadastrada com sucesso')
 
         setName('')
     }
@@ -63,7 +52,7 @@ export default function Category({ toggleTheme, themeTitle }: IHomeProps) {
                 className={Styles.categoryMain}
 
             >
-                <form className={Styles.formCategory} onSubmit={handleRegister}>
+                <form className={Styles.categoryForm} onSubmit={handleRegister}>
                     <Title
                         name="Cadastrar categoria"
                     />
@@ -80,3 +69,9 @@ export default function Category({ toggleTheme, themeTitle }: IHomeProps) {
         </div>
     )
 }
+
+export const getServerSideProps = canSSRAuth(async (context) => {
+    return {
+        props: {}
+    }
+})

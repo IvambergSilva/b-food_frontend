@@ -1,6 +1,6 @@
 import Button from "@/components/Button/Button";
 import { Input } from "@/components/Input/Input";
-import { AuthContext } from "@/contexts/authContext";
+import { AuthContext, IToggleProps } from "@/contexts/authContext";
 import React, { FormEvent, useContext, useState } from "react";
 import Styles from './login.module.scss'
 import { toast } from "react-toastify";
@@ -10,12 +10,7 @@ import Switch from "@/components/Switch/Switch";
 import CanSSRGuest from "@/utils/canSSRGuest";
 import { DarkMode, LightMode } from "@/styles/variables";
 
-interface IHomeProps {
-    toggleTheme(): void;
-    themeTitle: string
-}
-
-export default function Login({ toggleTheme, themeTitle }: IHomeProps) {
+export default function Login({ toggleTheme, themeTitle }: IToggleProps) {
     const [newUser, setNewUser] = useState(false)
     const [loading, setLoading] = useState(false)
 
@@ -30,11 +25,7 @@ export default function Login({ toggleTheme, themeTitle }: IHomeProps) {
         event.preventDefault()
 
         if (email === '' || password === '') {
-            toast.error('Preencha todos os campos', {
-                style: {
-                    fontSize: '1.5rem'
-                }
-            })
+            toast.error('Preencha todos os campos')
 
             setEmail('')
             setPassword('')
@@ -46,11 +37,7 @@ export default function Login({ toggleTheme, themeTitle }: IHomeProps) {
 
     async function handleSignUp() {
         if (name === '') {
-            toast.error('Preencha todos os campos', {
-                style: {
-                    fontSize: '1.5rem'
-                }
-            })
+            toast.error('Preencha todos os campos')
 
             setName('')
             return;
@@ -73,11 +60,7 @@ export default function Login({ toggleTheme, themeTitle }: IHomeProps) {
             setPassword('')
         }
 
-        toast.success('Cadastro efetuado com sucesso', {
-            style: {
-                fontSize: '1.5rem'
-            }
-        })
+        toast.success('Cadastro efetuado com sucesso')
 
         setLoading(false)
     }
@@ -93,11 +76,7 @@ export default function Login({ toggleTheme, themeTitle }: IHomeProps) {
         const feeback = await signIn(userInfo)
 
         if (feeback) {
-            toast.success('Login efetuado com sucesso', {
-                style: {
-                    fontSize: '1.5rem'
-                }
-            })
+            toast.success('Login efetuado com sucesso')
         }
 
         setLoading(false)
@@ -121,7 +100,7 @@ export default function Login({ toggleTheme, themeTitle }: IHomeProps) {
                     : ImageLight.src
             } alt="Logo da aplicação" />
 
-            <form onSubmit={handleLogin} className={Styles.formLogin}>
+            <form onSubmit={handleLogin} className={Styles.loginForm}>
                 {newUser &&
                     <Input
                         placeholder="Digite o nome da sua empresa"

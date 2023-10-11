@@ -33,6 +33,11 @@ interface IAuthProviderProps {
     children: ReactNode
 }
 
+export interface IToggleProps {
+    toggleTheme(): void;
+    themeTitle: string
+}
+
 export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: IAuthProviderProps) {
@@ -74,11 +79,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
 
             return true
         } catch (error) {
-            toast.error('Error ao acessar. Observe o console.', {
-                style: {
-                    fontSize: '1.5rem'
-                }
-            })
+            toast.error('Error ao acessar. Observe o console.')
             console.log('Error: ', error);
 
             return false
@@ -93,11 +94,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
 
             return false
         } catch (error) {
-            toast.error('Error ao acessar. Observe o console.', {
-                style: {
-                    fontSize: '1.5rem'
-                }
-            })
+            toast.error('Error ao acessar. Observe o console.')
             console.log('Error: ', error);
         }
     }
@@ -113,11 +110,8 @@ export function signOut() {
     try {
         destroyCookie(undefined, '@bfood.token')
         Router.push('/')
+        toast.success('Sessão encerrada com sucesso')
     } catch {
-        toast.error('Error ao deslogar', {
-            style: {
-                fontSize: '1.5rem'
-            }
-        })
+        toast.error('Error ao deslogar')
     }
 }
