@@ -51,7 +51,7 @@ function createTextStyle(size: string, lineHeight: string, weight: string) {
 }
 
 export const PrimaryHeading = createTextStyle('2.4rem', '100%', '700')
-export const SecundaryHeading = createTextStyle('1.4rem', '130%', '700')
+export const SecundaryHeading = createTextStyle('2.4rem', '130%', '700')
 export const Button = createTextStyle('1.4rem', '130%', '600')
 export const Tag = createTextStyle('1.2rem', '130%', '600')
 export const Body = createTextStyle('1.2rem', '130%', '400')

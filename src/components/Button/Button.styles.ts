@@ -1,7 +1,7 @@
 import { DarkMode } from '@/styles/variables'
 import { keyframes, styled } from 'styled-components'
 
-const IconSpin = keyframes`
+export const IconSpin = keyframes`
     0% {
         transform: rotate(0deg);
     }

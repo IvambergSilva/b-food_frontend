@@ -1,6 +1,5 @@
 import { DarkMode, LightMode } from "@/styles/variables";
 import Head from "next/head";
-
 import Styles from './product.module.scss'
 import Header from "@/components/Header/Header";
 import { Input, TextArea } from "@/components/Input/Input";
@@ -57,11 +56,11 @@ export default function Product({ themeTitle, toggleTheme, categoryList }: IProd
                 return;
             }
 
+            data.append('file', avatarImage)
             data.append('name', infoProduct.name)
             data.append('price', infoProduct.price)
             data.append('description', infoProduct.description)
             data.append('category_id', categories[categorySelected].id)
-            data.append('file', avatarImage)
 
             const apiClient = setupApiClient();
             await apiClient.post('/product', data);

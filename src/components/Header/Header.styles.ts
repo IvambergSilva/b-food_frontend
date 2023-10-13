@@ -1,4 +1,3 @@
-import { DarkMode } from "@/styles/variables";
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
@@ -58,6 +57,7 @@ export const HeaderContainer = styled.header`
 
             &:hover {
                 transform: scale(1.1);
+                transition: 0.3s;
             }
 
             &:active {
