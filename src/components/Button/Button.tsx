@@ -5,12 +5,14 @@ import { ButtonContainer } from "./Button.styles";
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     name: string
     loading?: boolean
+    model?: string 
 }
 
-export default function Button({ name, loading, ...rest }: IButtonProps) {
+export default function Button({ name, loading, model, ...rest }: IButtonProps) {
     return (
         <ButtonContainer
             disabled={loading}
+            model={model}
             {...rest}
         >
             <p>

@@ -1,25 +1,28 @@
 import { IconSpin } from "@/components/Button/Button.styles";
-import { SecundaryHeading } from "@/styles/variables";
+import { Paragraph, SecundaryHeading } from "@/styles/variables";
 import styled from "styled-components";
 
 interface IRefreshProps {
-    active: boolean;
+    status: boolean;
 }
 
 export const IconRefresh = styled.button<IRefreshProps>`
         cursor: pointer;
         background: none;
         border: none;
-        color: ${(props) => props.theme.colors.base.gray_100};
-                
+        color: ${(props) => props.theme.colors.pallete.success};
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         &:hover {
             transform: scale(1.1);
             transition: 0.3s;
         }
 
         animation: ${(props) => {
-        return props.active ? IconSpin : ''
-    }} 1s infinite;
+        return props.status ? IconSpin : ''
+    }} 1s linear infinite;
 `
 
 export const DashboardContainer = styled.div`
@@ -32,6 +35,12 @@ export const DashboardContainer = styled.div`
         display: flex;
         flex-direction: column;
         gap: 2rem;
+
+        h2 {
+            color: ${(props) => props.theme.colors.pallete.brightOrange};
+            font-size: ${Paragraph.size};
+            font-style: italic;
+        }
     }
 
     .dashboardTitle {
@@ -64,10 +73,20 @@ export const DashboardContainer = styled.div`
         }
     }
 
-    @media screen and (max-width: 768px) {
-        main {
-            width: 90%;
-        }
-    }
+    z-index: 1;
+`
 
+export const ModalContent = styled.div`
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    
+    .modalBG {
+        background: ${(props) => props.theme.colors.base.gray_200};
+        width: 100%;
+        opacity: 0.9;
+        height: 100vh;
+        position: absolute;
+    }
 `

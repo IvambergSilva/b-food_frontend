@@ -107,7 +107,7 @@ export default function Product({ themeTitle, toggleTheme, categoryList }: IProd
                         onChange={handleChangeCategory}>
                         {categories.map((category, index) => {
                             return (
-                                <option key={category.id} value={index}>{category.name}</option>
+                                <option key={index} value={index}>{category.name}</option>
                             )
                         })}
                     </Select>

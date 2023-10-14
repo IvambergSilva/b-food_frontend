@@ -1,11 +1,10 @@
 import Header from "@/components/Header/Header"
 import canSSRAuth from "@/utils/canSSRAuth"
 import Head from "next/head"
-import { IToggleProps } from "@/contexts/authContext";
 import Title from "@/components/Title/Title";
-import { DashboardContainer, IconRefresh } from "./dashboard.styles";
+import { DashboardContainer, IconRefresh, ModalContent } from "./dashboard.styles";
 import { RefreshCw } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import setupApiClient from "@/services/api";
 import ModalDetails from "@/components/ModalDetails/ModalDetails";
 
@@ -66,6 +65,36 @@ export default function Dashboard({ toggleTheme, themeTitle, activeOrders }: IDa
         setModalDetails(response.data)
     }
 
+    async function handleFinishOrder(id: string) {
+        const apiClient = setupApiClient();
+        await apiClient.put('/order/finish', {
+            order_id: id
+        })
+
+        handleRefreshOrders()
+
+        setModalVisible(false)
+    }
+
+    function handleCloseModal(event: React.MouseEvent) {
+        if (event.target === event.currentTarget) {
+            setModalVisible(false)
+        }
+    }
+
+    async function handleRefreshOrders() {
+        setRefresh(true)
+        const apiClient = setupApiClient();
+        const response = await apiClient.get('/orders')
+        setOrders(response.data)
+
+        if (response.data) {
+            setTimeout(() => {
+                setRefresh(false)
+            }, 500);
+        }
+    }
+
     return (
         <>
             <Head>
@@ -82,19 +111,23 @@ export default function Dashboard({ toggleTheme, themeTitle, activeOrders }: IDa
                     <div className="dashboardTitle">
                         <Title name="Últimos pedidos" />
                         <IconRefresh
-                            active={refresh}
-                            onClick={() => setRefresh(true)}
+                            status={refresh}
+                            onClick={() => handleRefreshOrders()}
                         >
                             <RefreshCw />
                         </IconRefresh>
                     </div>
 
-                    {orders.map((order) => {
+                    {orders.length === 0 && (
+                        <h2>Não há nenhum pedido aberto...</h2>
+                    )}
+
+                    {orders.map((order, index) => {
                         {
                             return (
                                 !order.status && (
                                     <section
-                                        key={order.id}
+                                        key={index}
                                         onClick={() => handleOpenModal(order.id)}
                                     >
                                         <span>Mesa {order.table}</span>
@@ -105,10 +138,14 @@ export default function Dashboard({ toggleTheme, themeTitle, activeOrders }: IDa
                     })}
                 </main>
 
-                {modalVisible && <ModalDetails
-                    order={modalDetails}
-                    onClose={() => setModalVisible(false)}
-                />}
+                {modalVisible && <ModalContent>
+                    <div className="modalBG" onClick={(e) => handleCloseModal(e)}></div>
+                    <ModalDetails
+                        order={modalDetails}
+                        onClose={() => setModalVisible(false)}
+                        handleFinishOrder={handleFinishOrder}
+                    />
+                </ModalContent>}
 
             </DashboardContainer>
         </>

@@ -10,13 +10,19 @@ export const IconSpin = keyframes`
     }
 `
 
-export const ButtonContainer = styled.button`
+interface IButtonContainerProps {
+    model: string
+}
+
+export const ButtonContainer = styled.button<IButtonContainerProps>`
     width: 100%;
     border-radius: 0.5rem;
     border: none;
     padding: 0.8rem;
     background: ${(props) => {
-        return props.type === 'submit' ? DarkMode.colors.pallete.success : DarkMode.colors.highlight.sereneIndigo
+        return props.type === 'submit' || props.model === 'conclude'
+            ? DarkMode.colors.pallete.success
+            : DarkMode.colors.highlight.sereneIndigo
     }};
     color: ${DarkMode.colors.base.gray_400};
 
