@@ -113,7 +113,7 @@ export default function Dashboard({ toggleTheme, themeTitle, activeOrders }: IDa
                     <div className="dashboardTitle">
                         <Title name="Últimos pedidos" />
                         <IconRefresh
-                            status={refresh}
+                            $status={refresh}
                             onClick={() => handleRefreshOrders()}
                         >
                             <RefreshCw />

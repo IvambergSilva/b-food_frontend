@@ -1,55 +1,46 @@
-import { DarkMode, Description, LightMode, Paragraph, TertiaryHeading } from "@/styles/variables";
+import { DarkMode, LightMode, Paragraph, TertiaryHeading } from "@/styles/variables";
 import styled from "styled-components";
 
-export const ModalContainer = styled.article`
-    color: ${(props) => props.theme.colors.base.gray_100};
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 2px solid ${(props) => props.theme.colors.pallete.rustyRed};
-    width: 70%;
-    padding: 3.5rem;
-    border-radius: 1rem;
-    background: ${DarkMode.colors.base.gray_400};
-    
-    .modalHeader {
-        position: relative;
+export const MenuContainer = styled.div`
+    background: ${(props) => props.theme.colors.base.gray_500};
+    min-height: 100vh;
 
-        button {
-            position: absolute;
-            right: 0;
-            top: 0;
-            background: none;
-            border: none;
-            color: ${(props) => props.theme.colors.pallete.rustyRed};
-            cursor: pointer;
-            
-            &:hover {
-                transform: scale(1.2);
-                transition: 0.3s;
-            } 
-        }
-    }
-
-    h2 {
-        font-size: ${TertiaryHeading.size};
-        margin-top: 2rem;
-        color: ${(props) => props.theme.colors.pallete.lightMustard};
-        text-align: center;
-    }
-
-    .modalDetailsContent {
-        margin-top: 2rem;
+    .mainContent {
+        max-width: 70rem;
+        width: 90%;
+        gap: 2.5rem;
+        padding: 3.5rem 0;
+        margin: auto;
         display: flex;
         flex-direction: column;
+
+        .menuTitle {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
         
+        h2, h3 {
+            color: ${DarkMode.colors.highlight.sereneIndigo};
+            font-size: ${TertiaryHeading.size};
+        }
+        
+        h2, p {
+            font-style: italic;
+        }
+
+        p {
+            font-size: ${Paragraph.size};
+            font-weight: ${Paragraph.weight};
+            margin-top: 0.5rem;
+            color: ${DarkMode.colors.pallete.rustyRed};
+        }
+
         .tableContainer {
-            width: 60%;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
-            margin: auto;
+            margin: 1.5rem auto 0;
 
             table {
                 width: 100%;
@@ -62,7 +53,7 @@ export const ModalContainer = styled.article`
                 background: ${LightMode.colors.pallete.success};
                 width: 100%;
                 display: grid;
-                grid-template-columns: 50% 50%;
+                grid-template-columns: 10% 40% 20% 30%;
                 height: 3rem;
                 align-items: center;
                 font-size: ${Paragraph.size};
@@ -78,7 +69,7 @@ export const ModalContainer = styled.article`
                 tr {
                     width: 100%;
                     display: grid;
-                    grid-template-columns: 50% 50%;
+                    grid-template-columns: 10% 40% 20% 30%;
                     border: 1px solid ${LightMode.colors.pallete.success};
                     
                     &:nth-child(even) {
@@ -95,7 +86,7 @@ export const ModalContainer = styled.article`
                         border-radius: 0 0 0.5rem 0.5rem;
                     }
                     
-                    td {
+                    td, span {
                         font-size: ${Paragraph.size};
                         height: 2.5rem;
                         display: flex;
@@ -106,6 +97,7 @@ export const ModalContainer = styled.article`
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
+                            padding: 0 1rem;
                         }
                     }
                 }

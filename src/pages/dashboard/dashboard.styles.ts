@@ -55,7 +55,7 @@ export const DashboardContainer = styled.div`
 `
 
 interface IRefreshProps {
-    status: boolean;
+    $status: boolean;
 }
 
 export const IconRefresh = styled.button<IRefreshProps>`
@@ -73,7 +73,7 @@ export const IconRefresh = styled.button<IRefreshProps>`
     }
 
     animation: ${(props) => {
-        return props.status ? IconSpin : ''
+        return props.$status ? IconSpin : ''
     }} 1s linear infinite;
 `
 

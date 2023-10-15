@@ -4,7 +4,6 @@ import Link from 'next/link'
 import './Header.styles'
 import Switch from '../Switch/Switch';
 import { HeaderContainer } from './Header.styles';
-import { DarkMode, LightMode } from '@/styles/variables';
 import { LogOut, Menu, X } from 'lucide-react';
 import { useContext, useState } from 'react';
 import { AuthContext, signOut } from '@/contexts/authContext';
@@ -17,7 +16,7 @@ export default function Header({ toggleTheme, themeTitle }) {
 
     return (
         <HeaderContainer
-            visibleMenu={visibleMenu}
+            $visibleMenu={visibleMenu}
         >
             <img src={
                 themeTitle === 'dark'

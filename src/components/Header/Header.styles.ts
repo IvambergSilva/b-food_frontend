@@ -4,7 +4,7 @@ import styled from "styled-components";
 const heightSize = '6rem';
 
 interface IHeaderContainerProps {
-    visibleMenu: boolean;
+    $visibleMenu: boolean;
 }
 
 export const HeaderContainer = styled.header<IHeaderContainerProps>`
@@ -90,7 +90,7 @@ export const HeaderContainer = styled.header<IHeaderContainerProps>`
         }
 
         @media screen and (max-width: 700px) {
-            display: ${(props) => props.visibleMenu ? 'flex' : 'none'};
+            display: ${(props) => props.$visibleMenu ? 'flex' : 'none'};
             position: absolute;
             top: calc(${heightSize} + 3px);
             background: ${(props) => props.theme.colors.base.gray_300};
