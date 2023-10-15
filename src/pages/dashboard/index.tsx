@@ -7,8 +7,9 @@ import { RefreshCw } from "lucide-react";
 import React, { useState } from "react";
 import setupApiClient from "@/services/api";
 import ModalDetails from "@/components/ModalDetails/ModalDetails";
+import { toast } from "react-toastify";
 
-export type ActiveOrders = {
+export type ActiveOrdersProps = {
     id: string;
     table: number;
     status: boolean;
@@ -19,10 +20,10 @@ export type ActiveOrders = {
 interface IDashboardProps {
     toggleTheme(): void;
     themeTitle: string
-    activeOrders: ActiveOrders[]
+    activeOrders: ActiveOrdersProps[]
 }
 
-export type ModalDetails = {
+export type ModalDetailsProps = {
     id: string;
     amount: number;
     order_id: string
@@ -50,7 +51,7 @@ export default function Dashboard({ toggleTheme, themeTitle, activeOrders }: IDa
 
     const [modalVisible, setModalVisible] = useState(false)
 
-    const [modalDetails, setModalDetails] = useState<ModalDetails[]>()
+    const [modalDetails, setModalDetails] = useState<ModalDetailsProps[]>()
 
     async function handleOpenModal(id: string) {
         setModalVisible(true)
@@ -70,6 +71,7 @@ export default function Dashboard({ toggleTheme, themeTitle, activeOrders }: IDa
         await apiClient.put('/order/finish', {
             order_id: id
         })
+        toast.success('Pedido concluído com sucesso');
 
         handleRefreshOrders()
 
@@ -107,7 +109,7 @@ export default function Dashboard({ toggleTheme, themeTitle, activeOrders }: IDa
                     themeTitle={themeTitle}
                 />
 
-                <main>
+                <main className="dashboardContent">
                     <div className="dashboardTitle">
                         <Title name="Últimos pedidos" />
                         <IconRefresh
@@ -129,6 +131,7 @@ export default function Dashboard({ toggleTheme, themeTitle, activeOrders }: IDa
                                     <section
                                         key={index}
                                         onClick={() => handleOpenModal(order.id)}
+                                        className="orderContainer"
                                     >
                                         <span>Mesa {order.table}</span>
                                     </section>
@@ -146,7 +149,6 @@ export default function Dashboard({ toggleTheme, themeTitle, activeOrders }: IDa
                         handleFinishOrder={handleFinishOrder}
                     />
                 </ModalContent>}
-
             </DashboardContainer>
         </>
     )

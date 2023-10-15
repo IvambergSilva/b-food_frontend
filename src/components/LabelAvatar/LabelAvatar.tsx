@@ -3,7 +3,7 @@ import { LabelAvatarContainer } from "./LabelAvatar.styles";
 import { ChangeEvent, useState } from "react";
 
 interface ILabelAvatarProps {
-    handleAvatarImage: (url: string) => void
+    handleAvatarImage: (image: File, url: string) => void
 }
 
 export default function LabelAvatar({ handleAvatarImage }: ILabelAvatarProps) {
@@ -17,8 +17,9 @@ export default function LabelAvatar({ handleAvatarImage }: ILabelAvatarProps) {
 
         if (image[0].type === 'image/png' || image[0].type === 'image/jpeg') {
             setAvatarImage(image[0])
-            setAvatarURL(URL.createObjectURL(image[0]))
-            handleAvatarImage(URL.createObjectURL(image[0]))
+            const imageUrl = URL.createObjectURL(image[0])
+            setAvatarURL(imageUrl)
+            handleAvatarImage(image[0], imageUrl)
         }
     }
 

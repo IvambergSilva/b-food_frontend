@@ -1,6 +1,4 @@
-import { DarkMode, LightMode } from "@/styles/variables";
 import Head from "next/head";
-import Styles from './product.module.scss'
 import Header from "@/components/Header/Header";
 import { Input, TextArea } from "@/components/Input/Input";
 import Title from "@/components/Title/Title";
@@ -11,8 +9,9 @@ import setupApiClient from "@/services/api";
 import { Select } from "@/components/Select/Select";
 import { toast } from "react-toastify";
 import Button from "@/components/Button/Button";
+import { ProductContainer } from "./product.styles";
 
-type CategoryList = {
+export type CategoryListProps = {
     id: string;
     name: string;
 }
@@ -20,10 +19,11 @@ type CategoryList = {
 interface IProductProps {
     toggleTheme(): void;
     themeTitle: string
-    categoryList: CategoryList[]
+    categoryList: CategoryListProps[]
 }
 
 export default function Product({ themeTitle, toggleTheme, categoryList }: IProductProps) {
+    const [avatarImage, setAvatarImage] = useState(null)
 
     const [infoProduct, setInfoProduct] = useState({
         name: '',
@@ -31,10 +31,8 @@ export default function Product({ themeTitle, toggleTheme, categoryList }: IProd
         description: ''
     })
 
-    const [avatarImage, setAvatarImage] = useState('')
-
-    function handleAvatarImage(url: string) {
-        setAvatarImage(url)
+    async function handleAvatarImage(image: File, url: string) {
+        setAvatarImage(image);
     }
 
     const [categories, setCategories] = useState(categoryList || [])
@@ -50,6 +48,7 @@ export default function Product({ themeTitle, toggleTheme, categoryList }: IProd
 
         try {
             const data = new FormData()
+            console.log(data);
 
             if (Object.values(infoProduct).some(info => info === '' || info === null)) {
                 toast.error('Preencha todos os campos');
@@ -66,19 +65,15 @@ export default function Product({ themeTitle, toggleTheme, categoryList }: IProd
             await apiClient.post('/product', data);
 
             toast.success('Produto cadastrado com sucesso');
-        } catch(error) {""
+        } catch (error) {
+            ""
             toast.error('Erro ao cadastrar')
             console.log('Error: ', error);
         }
     }
 
     return (
-        <div className={Styles.productContainer}
-            style={{
-                backgroundColor: `${themeTitle === 'dark'
-                    ? DarkMode.colors.base.gray_500
-                    : LightMode.colors.base.gray_500}`
-            }}>
+        <ProductContainer>
 
             <Head>
                 <title>B-Food - Novo produto</title>
@@ -89,15 +84,10 @@ export default function Product({ themeTitle, toggleTheme, categoryList }: IProd
                 toggleTheme={toggleTheme}
             />
 
-            <main className={Styles.productMain}>
-                <form className={Styles.productForm} onSubmit={handleRegisterCaregory}>
-                    <Title name="Novo produto" />
-                    <h2>{avatarImage}</h2>
-                    <h2>{infoProduct.name}</h2> 
-                    <h2>{infoProduct.price}</h2>
-                    <h2>{infoProduct.description}</h2>
-                    <h2>{categories[categorySelected].id}</h2>
+            <main className="productMain">
+                <Title name="Novo produto" />
 
+                <form className="productForm" onSubmit={handleRegisterCaregory}>
                     <LabelAvatar
                         handleAvatarImage={handleAvatarImage}
                     />
@@ -139,7 +129,7 @@ export default function Product({ themeTitle, toggleTheme, categoryList }: IProd
                     <Button name="Cadastrar" />
                 </form>
             </main>
-        </div>
+        </ProductContainer>
     )
 }
 

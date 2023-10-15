@@ -2,14 +2,13 @@ import Button from "@/components/Button/Button";
 import { Input } from "@/components/Input/Input";
 import Head from "next/head";
 import Header from "@/components/Header/Header";
-import Styles from './category.module.scss'
-import { DarkMode, LightMode } from "@/styles/variables";
 import Title from "@/components/Title/Title";
 import { FormEvent, useState } from "react"
 import setupApiClient from "@/services/api";
 import { toast } from "react-toastify";
 import canSSRAuth from "@/utils/canSSRAuth";
 import { IToggleProps } from "@/contexts/authContext";
+import { CategoryContainer } from "./category.styles";
 
 export default function Category({ toggleTheme, themeTitle }: IToggleProps) {
 
@@ -33,14 +32,9 @@ export default function Category({ toggleTheme, themeTitle }: IToggleProps) {
     }
 
     return (
-        <div className={Styles.categoryContainer}
-            style={{
-                backgroundColor: `${themeTitle === 'dark'
-                    ? DarkMode.colors.base.gray_500
-                    : LightMode.colors.base.gray_500}`
-            }}>
+        <CategoryContainer>
             <Head>
-                <title>B-Food - Painel</title>
+                <title>B-Food - Nova categoria</title>
             </Head>
 
             <Header
@@ -49,13 +43,13 @@ export default function Category({ toggleTheme, themeTitle }: IToggleProps) {
             />
 
             <main
-                className={Styles.categoryMain}
-
+                className="categoryMain"
             >
-                <form className={Styles.categoryForm} onSubmit={handleRegister}>
-                    <Title
-                        name="Cadastrar categoria"
-                    />
+                <Title
+                    name="Cadastrar categoria"
+                />
+                
+                <form className="categoryForm" onSubmit={handleRegister}>
                     <Input
                         placeholder="Digite uma nova categoria"
                         value={name}
@@ -66,7 +60,7 @@ export default function Category({ toggleTheme, themeTitle }: IToggleProps) {
                     />
                 </form>
             </main>
-        </div>
+        </CategoryContainer>
     )
 }
 

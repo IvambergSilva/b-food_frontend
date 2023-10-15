@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify'
 import { ThemeProvider } from 'styled-components';
 import { useState } from 'react';
 import { DarkMode, LightMode } from '@/styles/variables';
+import { IntlProvider } from 'react-intl';
 
 export default function App({ Component, pageProps }: AppProps) {
     const [theme, setTheme] = useState(DarkMode)
@@ -18,15 +19,17 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <ThemeProvider theme={theme}>
             <AuthProvider>
-                <ToastContainer
-                    autoClose={2500}
-                    style={{ fontSize: '1.5rem' }} />
-                <GlobalStyle />
-                <Component
-                    toggleTheme={toggleTheme}
-                    themeTitle={theme.title}
-                    {...pageProps}
-                />
+                <IntlProvider locale='pt-BR'>
+                    <ToastContainer
+                        autoClose={2500}
+                        style={{ fontSize: '1.5rem' }} />
+                    <GlobalStyle />
+                    <Component
+                        toggleTheme={toggleTheme}
+                        themeTitle={theme.title}
+                        {...pageProps}
+                    />
+                </IntlProvider>
             </AuthProvider>
         </ThemeProvider>
     )

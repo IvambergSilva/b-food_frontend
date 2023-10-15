@@ -22,7 +22,7 @@ export const TextAreaContainer = styled.textarea`
     width: 100%;
     resize: none;
     padding: 0.8rem 1rem;
-    min-height: 12rem;
+    height: 8rem;
     border-radius: 0.5rem;
     border: 1px solid ${(props) => props.theme.colors.base.gray_300};
     outline: none;
